@@ -1,0 +1,20 @@
+@echo off
+rem 设置程序路径，例如：C:\Program Files\MyApp\MyApp.exe
+set program_path=C:\Program Files\MyApp\MyApp.exe
+
+rem 设置重启间隔（以秒为单位），7200秒等于2小时
+set restart_interval=7200
+
+rem 开始循环
+:loop
+rem 结束当前正在运行的程序，忽略错误信息
+taskkill /f /im "MyApp.exe" 2>nul
+
+rem 启动程序
+start "" "%program_path%"
+
+rem 等待一段时间
+timeout /t %restart_interval%
+
+rem 返回循环
+goto loop
